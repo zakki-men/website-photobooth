@@ -1,0 +1,280 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  background-color: #add8e6; /* Light Blue */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.container {
+  background-color: rgba(173, 216, 230, 0.3); /* Warna biru muda transparan */
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 50px;
+  text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+/* Efek Neon Bergerak di Sekitar Container */
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background: linear-gradient(
+    45deg,
+    #ff008a,
+    #00ffc6,
+    #007bff,
+    #ff00c8,
+    #ff008a
+  );
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: glowing 80s linear infinite; /* Durasi animasi diperlambat menjadi 80 detik */
+  border-radius: 15px;
+}
+
+.container::after {
+  filter: blur(20px);
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* Efek Neon Tambahan di Pinggir Container */
+.container {
+  box-shadow: 0 0 10px rgba(78, 205, 196, 0.7),
+    /* Neon teal tipis */ 0 0 20px rgba(78, 205, 196, 0.5),
+    /* Lapisan kedua lebih lebar */ 0 0 30px rgba(78, 205, 196, 0.3),
+    /* Lapisan ketiga lebih lebar lagi */ 0 8px 24px rgba(0, 0, 0, 0.2); /* Bayangan utama */
+}
+
+.container:hover {
+  box-shadow: 0 0 15px rgba(78, 205, 196, 0.8), 0 0 30px rgba(78, 205, 196, 0.6),
+    0 0 45px rgba(78, 205, 196, 0.4), 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3.5em;
+  color: #1e3a8a;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  animation: fadeInTitle 1s ease-out;
+  font-weight: 900; /* Lebih tebal dari bold */
+}
+
+@keyframes fadeInTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) translateZ(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.tagline {
+  font-family: "Open Sans", sans-serif;
+  color: #718096;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  animation: fadeInSlogan 1.5s ease-out;
+  font-weight: 800; /* Lebih tebal dari bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Tambahkan bayangan teks */
+}
+
+@keyframes fadeInSlogan {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) translateZ(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.creator {
+  font-family: "Roboto", sans-serif;
+  color: #4a5568;
+  margin-bottom: 30px;
+  font-style: italic;
+  font-size: 1em;
+  animation: fadeInUp 2s ease-out;
+  transform: translateZ(5px);
+  font-weight: 700; /* Lebih tebal dari bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Tambahkan bayangan teks */
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) translateZ(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.start-button {
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(66, 153, 225, 0.4);
+  animation: pulseButton 2s infinite alternate;
+  transform: rotateY(0deg) translateZ(2px);
+  font-weight: 700; /* Lebih tebal dari bold */
+}
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1) translateZ(0);
+  }
+  100% {
+    transform: scale(1.05) translateZ(0);
+  }
+}
+
+.like-button {
+  background-color: white;
+  color: #e53e3e;
+  border: 2px solid #e53e3e;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(229, 62, 62, 0.4);
+  transform: rotateX(0deg) translateZ(2px);
+}
+
+.like-button:hover {
+  background-color: #fdecea;
+  transform: rotateX(15deg) translateZ(5px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(253, 236, 234, 0.5);
+}
+
+.like-button.liked {
+  background-color: #e53e3e;
+  color: white;
+  animation: heartBeat 0.5s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(1.2) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.made-by {
+  font-family: "Roboto", sans-serif;
+  color: #a0aec0;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  animation: fadeInUp 2s ease-out 0.5s;
+  transform: translateZ(1px);
+  font-weight: 700; /* Lebih tebal dari bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Tambahkan bayangan teks */
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) translateZ(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.heart {
+  color: #e53e3e;
+}
+
+.copyright {
+  color: #cbd5e0;
+  font-size: 0.8em;
+  animation: fadeInUp 2.5s ease-out 0.7s;
+  transform: translateZ(0.5px);
+  font-weight: 700; /* Lebih tebal dari bold */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Tambahkan bayangan teks */
+}
+
+/* Hapus efek neon pojok untuk tampilan desktop */
+@media (min-width: 768px) {
+  .container::before-top-right,
+  .container::after-bottom-left {
+    content: none; /* Hilangkan elemen neon pojok */
+  }
+}

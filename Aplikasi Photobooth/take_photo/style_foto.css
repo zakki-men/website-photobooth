@@ -1,0 +1,619 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #e0f2f7, #cce5ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 20px;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  background-color: #e7f6f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 20px 5px #dcf1f1,
+    0 0 30px 10px #00ffff;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto; /* Tambah baris untuk background */
+  grid-template-areas:
+    "camera filter results"
+    "controls filter results" /* Kontrol kamera tetap di sini */
+    "background filter results" /* Latar belakang di bawah kontrol */
+    ". . navigation";
+  gap: 15px;
+  width: 90%;
+  max-width: 900px;
+  position: relative;
+  min-height: 70vh;
+  margin: 20px;
+  /* Padding bawah bisa disesuaikan jika perlu ruang lebih */
+  /* padding-bottom: 60px; */
+}
+
+/* Camera Section */
+.camera-section {
+  grid-area: camera;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #6a89ec;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.camera-preview {
+  flex-grow: 1;
+  background-color: #dba5a5;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ac2d2d;
+  font-size: 1.2em;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 250px;
+}
+
+.camera-preview video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(244, 229, 214);
+}
+
+/* Camera Controls */
+.camera-controls {
+  grid-area: controls;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.camera-controls button,
+.upload-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.camera-controls button:hover,
+.upload-button:hover {
+  background-color: #5cb85c;
+  transform: scale(1.02);
+}
+
+.camera-controls button:active,
+.upload-button:active {
+  background-color: #4cae4c;
+  transform: scale(0.98);
+}
+
+.take-photo-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.flip-camera-button {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Upload Controls */
+.upload-button {
+  background-color: #007bff;
+  color: white;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#upload-photo {
+  display: none;
+}
+
+/* Background Selection */
+.background-selection {
+  grid-area: background;
+  margin-top: 15px; /* Berikan sedikit jarak dari elemen di atasnya */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.background-selection h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1em;
+}
+
+.background-buttons {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.background-button {
+  width: auto;
+  min-width: 50px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7em;
+  color: white;
+  text-align: center;
+  line-height: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 0 5px;
+}
+
+.background-button:hover {
+  transform: scale(1.02);
+}
+
+.background-button:active {
+  transform: scale(0.98);
+}
+
+.background-button[data-background="white"] {
+  color: #333;
+}
+
+#custom-background-button {
+  color: #333;
+}
+
+#upload-background {
+  display: none;
+}
+
+/* Filter Section */
+.filter-section {
+  grid-area: filter;
+}
+
+.filter-section h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1em;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.filter-button,
+#custom-filter-button {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.filter-button.active,
+#custom-filter-button.active {
+  background-color: #0b7dda;
+  color: white;
+}
+
+.filter-button:hover,
+#custom-filter-button:hover {
+  background-color: #0d8bf2;
+  transform: scale(1.02);
+}
+
+.filter-button:active,
+#custom-filter-button:active {
+  background-color: #0a5cb8;
+  transform: scale(0.98);
+}
+
+/* Results Section */
+.results-section {
+  grid-area: results;
+}
+
+.results-section h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1em;
+}
+
+.photo-results-container {
+  display: flex;
+  flex-direction: column; /* Untuk menumpuk foto secara vertikal */
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 400px; /* Sesuaikan tinggi maksimal jika perlu */
+}
+
+.photo-results {
+  background-color: #eeb6b6;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex; /* Menggunakan flex untuk mengatur gambar */
+  justify-content: center; /* Tengah horizontal */
+  align-items: center; /* Tengah vertikal */
+  width: 100%; /* Lebar 100% dari container */
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px; /* Jarak antar foto */
+}
+
+.photo-results img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Menggunakan 'contain' agar seluruh gambar terlihat */
+  display: block;
+}
+
+.photo-results .delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #f44336;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  z-index: 1;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.photo-results .delete-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+}
+
+.photo-results .delete-button:active {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(0.9);
+}
+
+/* Navigation Buttons */
+.navigation-wrapper {
+  grid-area: navigation;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.navigation-wrapper button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navigation-wrapper button:hover {
+  background-color: #28a745;
+  transform: scale(1.02);
+}
+
+.navigation-wrapper button:active {
+  background-color: #218838;
+  transform: scale(0.98);
+}
+
+.reset-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.next-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Countdown Circle */
+#countdown-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #00ffff;
+  color: #fff;
+  font-size: 2em;
+  font-weight: bold;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  box-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff;
+  animation: countdown-pulse 1s infinite alternate;
+}
+
+@keyframes countdown-pulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Custom Filter Box */
+.custom-filter-box {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background-color: #333;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  width: 85%;
+  max-width: 350px;
+}
+
+.custom-filter-box.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.custom-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 8px;
+}
+
+.custom-filter-title {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-button {
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.close-button:hover {
+  color: white;
+}
+
+.custom-filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.control-item label {
+  font-size: 0.8em;
+  color: #eee;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.slider-container button {
+  background: none;
+  color: white;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.slider-container button:hover {
+  border-color: white;
+}
+
+.slider-container input[type="range"] {
+  flex-grow: 1;
+}
+
+.custom-filter-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.custom-filter-footer button {
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.custom-filter-footer button:hover {
+  background-color: #777;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas:
+      "camera"
+      "controls"
+      "background"
+      "filter"
+      "results"
+      "navigation";
+    padding: 15px;
+    margin: 15px;
+    /* Padding bawah bisa disesuaikan */
+    /* padding-bottom: 80px; */
+  }
+
+  .camera-section {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    min-height: auto;
+  }
+
+  .camera-controls {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    justify-content: center;
+  }
+
+  .background-selection {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    margin-top: 15px;
+  }
+
+  .filter-section {
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+    margin-top: 15px;
+  }
+  .results-section {
+    grid-column: 1 / -1;
+    grid-row: 5 / 6;
+    max-height: 300px;
+  }
+
+  .navigation-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 6 / 7;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+
+  .camera-preview {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-button,
+  #custom-filter-button {
+    width: auto;
+  }
+
+  .camera-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .camera-controls button,
+  .upload-button {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .background-selection {
+    margin-top: 10px;
+  }
+
+  .background-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+  }
+
+  .background-button {
+    width: 100%;
+    font-size: 0.8em;
+  }
+
+  #custom-background-button {
+    width: 100%;
+  }
+
+  .custom-filter-box {
+    width: 95%;
+  }
+
+  .navigation-wrapper {
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+
+  .navigation-wrapper button {
+    margin-bottom: 8px;
+  }
+
+  .camera-preview {
+    min-height: 150px;
+  }
+}
