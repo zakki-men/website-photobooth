@@ -1,0 +1,328 @@
+/* style_atur_desain.css */
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  background: linear-gradient(135deg, #cce5ff, #e0f2f7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 20px 5px #00ffff,
+    0 0 30px 10px #00ffff, 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.preview-area {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 400px;
+  height: auto;
+  max-height: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+#template-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+}
+
+#template-container.vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+}
+
+#template-container.vertical .preview-item {
+  background-color: transparent; /* Latar belakang transparan */
+  width: 80%;
+  height: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  border: 5px solid transparent; /* Warna bingkai diatur transparan default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#template-container.vertical .preview-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#template-container.horizontal-top-bottom {
+  flex-direction: column;
+}
+
+#template-container.horizontal-top-bottom .preview-bottom {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.preview-item {
+  background-color: transparent; /* Latar belakang transparan */
+  width: 100%;
+  height: auto;
+  border-radius: 4px; /* Default untuk persegi */
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  border: 5px solid transparent; /* Warna bingkai diatur transparan default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-item.top {
+  background-color: transparent; /* Latar belakang transparan */
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-item.bottom {
+  background-color: transparent; /* Latar belakang transparan */
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-frame {
+  width: 120%; /* Sesuaikan ukuran bingkai sesuai keinginan */
+  height: 120%; /* Sesuaikan ukuran bingkai sesuai keinginan */
+  border: 5px solid transparent; /* Warna bingkai */
+  box-sizing: border-box;
+  overflow: hidden; /* Penting agar border-radius bekerja */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white; /* Optional: Warna latar belakang di dalam bingkai */
+}
+
+.circle-frame {
+  border-radius: 50%;
+}
+
+.image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#template-container .preview-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.shape-controls h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.shape-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.shape-button {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: #333; /* Warna teks default */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Efek transisi halus */
+}
+
+.shape-button:hover {
+  background-color: lightgreen; /* Warna saat dihover (opsional) */
+}
+
+.shape-button.active {
+  background-color: #007bff; /* Warna biru saat aktif (ditekan) */
+  color: white; /* Warna teks saat aktif */
+  border-color: #007bff;
+}
+
+.frame-controls h2,
+.background-controls h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.color-palette,
+.texture-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.color-option,
+.texture-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+}
+
+.texture-option {
+  border-radius: 4px;
+}
+
+.color-option.active,
+.texture-option.active {
+  border-color: #555;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.frame-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px; /* Ukuran ikon di dalam frame */
+  color: inherit; /* Pewarisan warna dari elemen parent jika perlu */
+  /* Efek 3D dasar */
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-in-out;
+  background: none; /* Hapus background jika ada */
+  border: none; /* Hapus border jika ada */
+}
+
+.frame-icon i {
+  /* Hapus style transform jika kita menggunakan ::before */
+  transform: none;
+}
+
+.frame-icon.top-left {
+  top: 5px;
+  left: 5px;
+}
+
+.frame-icon.top-right {
+  top: 5px;
+  right: 5px;
+}
+
+.frame-icon.bottom-left {
+  bottom: 5px;
+  left: 5px;
+}
+
+.frame-icon.bottom-right {
+  bottom: 5px;
+  right: 5px;
+}
+
+/* Ikon-ikon lucu di sekitar .preview-item */
+.preview-item .frame-icon.top-left::before {
+  content: "\f005"; /* Ikon bintang (Font Awesome) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Solid style */
+  font-size: 20px;
+  color: gold; /* Warna ikon */
+}
+
+.preview-item .frame-icon.top-right::before {
+  content: "\f004"; /* Ikon hati (Font Awesome) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Solid style */
+  font-size: 22px;
+  color: pink; /* Warna ikon */
+}
+
+.preview-item .frame-icon.bottom-left::before {
+  content: "\f118"; /* Ikon senyum (Font Awesome) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Solid style */
+  font-size: 24px;
+  color: lightgreen; /* Warna ikon */
+}
+
+.preview-item .frame-icon.bottom-right::before {
+  content: "\f06d"; /* Ikon kilau/bintang jatuh (Font Awesome) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Solid style */
+  font-size: 20px;
+  color: skyblue; /* Warna ikon */
+}
+
+.preview-item img.circle {
+  border-radius: 50%;
+  object-fit: cover; /* Penting agar gambar tetap mengisi lingkaran */
+}
